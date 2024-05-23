@@ -1,0 +1,59 @@
+databaseChangeLog:
+  - changeSet:
+      id: Create users table
+      author: Rashad Suleymanov
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: username
+                  type: varchar(256)
+                  remarks: username of user
+                  constraints:
+                    nullable: false
+              - column:
+                  name: password
+                  type: varchar(256)
+                  remarks: password of user
+                  constraints:
+                    nullable: false
+              - column:
+                  name: fullName
+                  type: varchar(256)
+                  remarks: fullName of user
+                  constraints:
+                    nullable: false
+              - column:
+                  name: dateOfBirth
+                  type: date
+                  remarks: Date of birth of user
+                  constraints:
+                    nullable: true
+              - column:
+                  name: bankAccount
+                  type: varchar(256)
+                  remarks: Bank account number of user
+                  constraints:
+                    nullable: true
+              - column:
+                  name: email
+                  type: varchar(256)
+                  remarks: Email of user
+                  constraints:
+                    nullable: true
+              - column:
+                  name: phone
+                  type: varchar(20)
+                  remarks: Phone number of user
+                  constraints:
+                    nullable: true
+
+            remarks: Table to store info about users
