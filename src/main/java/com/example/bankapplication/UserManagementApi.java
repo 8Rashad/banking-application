@@ -1,9 +1,13 @@
 package com.example.bankapplication;
 
+import org.springframework.stereotype.Service;
+
 import java.util.*;
 
+@Service
 public class UserManagementApi {
     private static Map<String, User> users = new HashMap<>();
+    private static List<User> allUsers = new ArrayList<>();
 
     public static boolean addUser(String username, String password, String fullName, Date dateOfBirth, String email, String phone, BankAccount initialBalance) {
         if (isUsernameTaken(username) || isPhoneTaken(phone) || isEmailTaken(email)) {
@@ -14,6 +18,11 @@ public class UserManagementApi {
         users.put(username, newUser);
         return true;
     }
+
+    public List<User> findAll(){
+        return allUsers;
+    }
+
 
     private static boolean isUsernameTaken(String username) {
         return users.containsKey(username);
@@ -70,4 +79,6 @@ public class UserManagementApi {
         int toIndex = Math.min(fromIndex + pageSize, result.size());
         return result.subList(fromIndex, toIndex);
     }
+
+
 }

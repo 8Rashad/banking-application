@@ -1,5 +1,6 @@
 package com.example.bankapplication;
 
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -11,6 +12,7 @@ import java.util.Date;
 public class User {
 
     @Id
+    @GeneratedValue
     private Long id;
     private String username;
     private String password;
@@ -62,8 +64,7 @@ public class User {
         this.bankAccount = bankAccount;
     }
 
-
-    public boolean changePhone(String newPhone) {
+    public boolean changePhone(String newPhone, Long id) {
         if (!UserManagementApi.isPhoneTaken(newPhone)) {
             this.phone = newPhone;
             return true;
@@ -102,6 +103,9 @@ public class User {
             return false;
         }
     }
+
+
+
 
 
 }
