@@ -1,21 +1,30 @@
-package com.example.bankapplication;
+package com.example.bankapplication.service;
 
+import com.example.bankapplication.dao.entity.User;
+import com.example.bankapplication.dao.repository.UserRepository;
+import com.example.bankapplication.mapper.UserMapper;
+import com.example.bankapplication.model.UserRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
 public class UserManagementApi {
+    private UserRepository userRepository;
     private static Map<String, User> users = new HashMap<>();
     private static List<User> allUsers = new ArrayList<>();
 
-    public static boolean addUser(String username, String password, String fullName, Date dateOfBirth, String email, String phone, BankAccount initialBalance) {
-        if (isUsernameTaken(username) || isPhoneTaken(phone) || isEmailTaken(email)) {
+    public boolean saveUser(UserRequest userRequest) {
+        if (isUsernameTaken(userRequest.getUsername()) || isPhoneTaken(userRequest.getPhone()) || isEmailTaken(userRequest.getEmail())) {
             return false;
         }
 
-        User newUser = new User(username, password, fullName, dateOfBirth, email, phone, initialBalance);
-        users.put(username, newUser);
+        User newUser = UserMapper.buildUser(userRequest);
+
+        userRepository.save(newUser);
+
+        users.put(newUser.getUsername(), newUser);
+
         return true;
     }
 

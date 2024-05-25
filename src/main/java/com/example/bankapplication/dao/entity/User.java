@@ -1,14 +1,20 @@
-package com.example.bankapplication;
+package com.example.bankapplication.dao.entity;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+
+import com.example.bankapplication.service.UserManagementApi;
+import jakarta.persistence.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 
 import java.util.Date;
 
-
+@Entity
+@NoArgsConstructor
 @Table(name = "users")
+@Builder
+@Getter
 public class User {
 
     @Id
@@ -20,51 +26,25 @@ public class User {
     private Date dateOfBirth;
     private String email;
     private String phone;
-    private BankAccount bankAccount;
 
-    public Long getId() {
-        return id;
-    }
+    @OneToOne
+    @JoinColumn(name = "bank_account_id")
+    private BankAccount initialBalance;
 
-    public String getUsername() {
-        return username;
-    }
 
-    public String getPassword() {
-        return password;
-    }
 
-    public String getPhone() {
-        return phone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public Date getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public BankAccount getBankAccount() {
-        return bankAccount;
-    }
-
-    public User(String username, String password, String fullName, Date dateOfBirth, String email, String phone, BankAccount bankAccount) {
+    public User(Long id, String username, String password, String fullName, Date dateOfBirth, String email, String phone, BankAccount intialBalance) {
+        this.id = id;
         this.username = username;
         this.password = password;
         this.fullName = fullName;
         this.dateOfBirth = dateOfBirth;
         this.email = email;
         this.phone = phone;
-        this.bankAccount = bankAccount;
+        this.initialBalance = intialBalance;
     }
 
-    public boolean changePhone(String newPhone, Long id) {
+    public boolean changePhone(String newPhone) {
         if (!UserManagementApi.isPhoneTaken(newPhone)) {
             this.phone = newPhone;
             return true;

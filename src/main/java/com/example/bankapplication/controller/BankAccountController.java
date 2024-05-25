@@ -1,12 +1,30 @@
-package com.example.bankapplication;
+package com.example.bankapplication.controller;
 
+import com.example.bankapplication.dao.entity.BankAccount;
+import com.example.bankapplication.model.BankRequest;
+import com.example.bankapplication.service.BankService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/bank")
 public class BankAccountController {
     private final BankService bankService;
+
+    @GetMapping
+    public List<BankAccount> getAllBankAccounts(){
+        return bankService.getAllBankAccounts();
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public void saveBankAccount(@RequestBody BankRequest bankRequest){
+        System.out.println(bankRequest.toString());
+        bankService.saveBankAccount(bankRequest);
+    }
 
     @Autowired
     public BankAccountController(BankService bankService) {

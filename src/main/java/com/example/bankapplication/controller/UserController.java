@@ -1,6 +1,11 @@
-package com.example.bankapplication;
+package com.example.bankapplication.controller;
 
 
+import com.example.bankapplication.dao.entity.BankAccount;
+import com.example.bankapplication.model.SearchRequest;
+import com.example.bankapplication.dao.entity.User;
+import com.example.bankapplication.model.UserRequest;
+import com.example.bankapplication.service.UserManagementApi;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +16,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/users")
+@RequestMapping("/api/")
 public class UserController {
 
     private final UserManagementApi userManagementApi;
@@ -24,9 +29,10 @@ public class UserController {
 
     @PostMapping("/post/users")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<User> addUser(@RequestBody String username, String password, String fullName, Date dateOfBirth, String email, String phone, BankAccount initialBalance) {
-        userManagementApi.addUser(username, password, fullName, dateOfBirth, email, phone, initialBalance);
-        return ResponseEntity.created(null).build();
+    public void saveUser(@RequestBody UserRequest userRequest) {
+        System.out.println(userRequest.toString());
+        userManagementApi.saveUser(userRequest);
+
     }
 
     public List<User> searchUsers(@RequestBody SearchRequest searchRequest){
