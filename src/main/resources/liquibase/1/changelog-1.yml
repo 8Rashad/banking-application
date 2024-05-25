@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: Create users table
+      id: Create users and bank_account tables
       author: Rashad Suleymanov
       changes:
         - createTable:
@@ -32,15 +32,9 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: dateOfBirth
+                  name: date_of_birth
                   type: date
                   remarks: Date of birth of user
-                  constraints:
-                    nullable: true
-              - column:
-                  name: bankAccount
-                  type: varchar(256)
-                  remarks: Bank account number of user
                   constraints:
                     nullable: true
               - column:
@@ -55,5 +49,20 @@ databaseChangeLog:
                   remarks: Phone number of user
                   constraints:
                     nullable: true
+
+        - createTable:
+            tableName: bank_account
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: balance
+                  type: double
+
+
 
             remarks: Table to store info about users
