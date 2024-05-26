@@ -19,7 +19,7 @@ public class BankAccountController {
         return bankService.getAllBankAccounts();
     }
 
-    @PostMapping
+    @PostMapping("/post")
     @ResponseStatus(HttpStatus.CREATED)
     public void saveBankAccount(@RequestBody BankRequest bankRequest){
         System.out.println(bankRequest.toString());

@@ -18,7 +18,7 @@ import java.util.Date;
 public class User {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String username;
     private String password;
@@ -33,7 +33,7 @@ public class User {
 
 
 
-    public User(Long id, String username, String password, String fullName, Date dateOfBirth, String email, String phone, BankAccount intialBalance) {
+    public User(Long id, String username, String password, String fullName, Date dateOfBirth, String email, String phone, BankAccount initialBalance) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -41,7 +41,7 @@ public class User {
         this.dateOfBirth = dateOfBirth;
         this.email = email;
         this.phone = phone;
-        this.initialBalance = intialBalance;
+        this.initialBalance = initialBalance;
     }
 
     public boolean changePhone(String newPhone) {

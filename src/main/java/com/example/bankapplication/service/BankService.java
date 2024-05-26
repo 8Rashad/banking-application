@@ -1,16 +1,19 @@
 package com.example.bankapplication.service;
 
 import com.example.bankapplication.dao.entity.BankAccount;
+import com.example.bankapplication.dao.entity.User;
 import com.example.bankapplication.dao.repository.BankAccountRepository;
 import com.example.bankapplication.mapper.BankMapper;
 import com.example.bankapplication.model.BankRequest;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class BankService {
-    private BankAccountRepository bankAccountRepository;
+    private final BankAccountRepository bankAccountRepository;
 
     public void saveBankAccount(BankRequest bankRequest){
         bankAccountRepository.save(BankMapper.mapToBankAccount(bankRequest));
@@ -37,4 +40,5 @@ public class BankService {
             return false;
         }
     }
+
 }

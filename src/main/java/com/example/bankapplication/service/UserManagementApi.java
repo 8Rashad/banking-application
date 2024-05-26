@@ -4,13 +4,16 @@ import com.example.bankapplication.dao.entity.User;
 import com.example.bankapplication.dao.repository.UserRepository;
 import com.example.bankapplication.mapper.UserMapper;
 import com.example.bankapplication.model.UserRequest;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
+@RequiredArgsConstructor
+
 public class UserManagementApi {
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
     private static Map<String, User> users = new HashMap<>();
     private static List<User> allUsers = new ArrayList<>();
 

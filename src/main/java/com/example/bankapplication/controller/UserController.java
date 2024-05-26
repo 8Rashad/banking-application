@@ -1,17 +1,13 @@
 package com.example.bankapplication.controller;
 
 
-import com.example.bankapplication.dao.entity.BankAccount;
 import com.example.bankapplication.model.SearchRequest;
 import com.example.bankapplication.dao.entity.User;
 import com.example.bankapplication.model.UserRequest;
 import com.example.bankapplication.service.UserManagementApi;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -36,6 +32,6 @@ public class UserController {
     }
 
     public List<User> searchUsers(@RequestBody SearchRequest searchRequest){
-        return userManagementApi.searchUsers(searchRequest.minDateOfBirth, searchRequest.email, searchRequest.phone, searchRequest.fullName, searchRequest.pageNumber, searchRequest.pageSize, searchRequest.sortBy);
+        return UserManagementApi.searchUsers(searchRequest.minDateOfBirth, searchRequest.email, searchRequest.phone, searchRequest.fullName, searchRequest.pageNumber, searchRequest.pageSize, searchRequest.sortBy);
     }
 }
