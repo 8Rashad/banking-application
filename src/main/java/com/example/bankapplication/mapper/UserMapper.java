@@ -1,6 +1,5 @@
 package com.example.bankapplication.mapper;
 
-import com.example.bankapplication.dao.entity.BankAccount;
 import com.example.bankapplication.dao.entity.User;
 import com.example.bankapplication.model.UserRequest;
 
@@ -13,7 +12,7 @@ public class UserMapper {
                 .dateOfBirth(userRequest.getDateOfBirth())
                 .email(userRequest.getEmail())
                 .phone(userRequest.getPhone())
-                .initialBalance(userRequest.getInitialBalance())
+                .bankAccountId(userRequest.getInitialBalance())
                 .build();
 
     }

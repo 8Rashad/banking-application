@@ -1,7 +1,6 @@
 package com.example.bankapplication.dao.entity;
 
 
-import com.example.bankapplication.service.UserManagementApi;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -29,9 +28,15 @@ public class User {
 
     @OneToOne
     @JoinColumn(name = "bank_account_id")
-    private BankAccount initialBalance;
+    private BankAccount bankAccountId;
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
     public User(Long id, String username, String password, String fullName, Date dateOfBirth, String email, String phone, BankAccount initialBalance) {
         this.id = id;
@@ -41,51 +46,7 @@ public class User {
         this.dateOfBirth = dateOfBirth;
         this.email = email;
         this.phone = phone;
-        this.initialBalance = initialBalance;
+        this.bankAccountId = initialBalance;
     }
-
-    public boolean changePhone(String newPhone) {
-        if (!UserManagementApi.isPhoneTaken(newPhone)) {
-            this.phone = newPhone;
-            return true;
-        } else {
-            System.out.println("Unfortunately the number is already in use");
-            return false;
-        }
-    }
-
-    public boolean changeEmail(String newEmail) {
-        if (!UserManagementApi.isEmailTaken(newEmail)) {
-            this.email = newEmail;
-            return true;
-        } else {
-            System.out.println("Unfortunately the email address is already in use");
-            return false;
-        }
-    }
-
-    public boolean deletePhone() {
-        if (phone != null && email != null) {
-            phone = null;
-            return true;
-        } else {
-            System.out.println("The phone number cannot be deleted because the user must have at least one contact");
-            return false;
-        }
-    }
-
-    public boolean deleteEmail() {
-        if (phone != null && email != null) {
-            email = null;
-            return true;
-        } else {
-            System.out.println("The email cannot be deleted because the user must have at least one contact");
-            return false;
-        }
-    }
-
-
-
-
 
 }

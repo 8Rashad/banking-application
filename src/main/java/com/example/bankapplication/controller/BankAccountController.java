@@ -2,6 +2,7 @@ package com.example.bankapplication.controller;
 
 import com.example.bankapplication.dao.entity.BankAccount;
 import com.example.bankapplication.model.BankRequest;
+import com.example.bankapplication.model.BankResponse;
 import com.example.bankapplication.service.BankService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,11 +20,11 @@ public class BankAccountController {
         return bankService.getAllBankAccounts();
     }
 
-    @PostMapping("/post")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void saveBankAccount(@RequestBody BankRequest bankRequest){
+    public BankResponse saveBankAccount(@RequestBody BankRequest bankRequest){
         System.out.println(bankRequest.toString());
-        bankService.saveBankAccount(bankRequest);
+        return bankService.saveBankAccount(bankRequest);
     }
 
     @Autowired
@@ -32,12 +33,12 @@ public class BankAccountController {
     }
 
     @PostMapping("/{id}/deposit")
-    public void deposit(@PathVariable BankAccount id, @RequestParam double amount) {
+    public void deposit(@PathVariable Long id, @RequestParam double amount) {
         bankService.deposit(id, amount);
     }
 
     @PostMapping("/{id}/withdraw")
-    public boolean withdraw(@PathVariable BankAccount id, @RequestParam double amount) {
+    public boolean withdraw(@PathVariable Long id, @RequestParam double amount) {
         return bankService.withdraw(id, amount);
     }
 

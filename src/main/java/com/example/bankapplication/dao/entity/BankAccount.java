@@ -18,19 +18,12 @@ public class BankAccount {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private double balance;
+    private double initialBalance;
 
-    @OneToOne(mappedBy = "initialBalance") // mappedBy indicates the inverse side of the relationship
+
+    @OneToOne(mappedBy = "bankAccountId")
     private User user;
 
 
 }
 
-/* "username": "Vahid",
-         "password": "9271010",
-         "fullName":"Vahid Ismayilzade",
-         "dateOfBirth":"2000-12-05T00:00:00Z",
-         "email": "vahid.ismayilzada@gmail.com",
-         "phone": "+994517391339",
-         "initialBalance": {
-         "balance": 350.0
-         } */

@@ -1,6 +1,8 @@
 package com.example.bankapplication.service;
 
+import com.example.bankapplication.dao.entity.BankAccount;
 import com.example.bankapplication.dao.entity.User;
+import com.example.bankapplication.dao.repository.BankAccountRepository;
 import com.example.bankapplication.dao.repository.UserRepository;
 import com.example.bankapplication.mapper.UserMapper;
 import com.example.bankapplication.model.UserRequest;
@@ -14,6 +16,7 @@ import java.util.*;
 
 public class UserManagementApi {
     private final UserRepository userRepository;
+    private final BankAccountRepository bankAccountRepository;
     private static Map<String, User> users = new HashMap<>();
     private static List<User> allUsers = new ArrayList<>();
 
@@ -23,6 +26,8 @@ public class UserManagementApi {
         }
 
         User newUser = UserMapper.buildUser(userRequest);
+        BankAccount initialBalance = userRequest.getInitialBalance();
+        bankAccountRepository.save(initialBalance);
 
         userRepository.save(newUser);
 
@@ -37,6 +42,7 @@ public class UserManagementApi {
 
 
     private static boolean isUsernameTaken(String username) {
+
         return users.containsKey(username);
     }
 
@@ -92,5 +98,26 @@ public class UserManagementApi {
         return result.subList(fromIndex, toIndex);
     }
 
+    public boolean changePhone(Long id, String newPhone) {
+        User theUserId = userRepository.getById(id);
+        List<String> allPhones = userRepository.getAllPhones();
+        if(allPhones.contains(newPhone)){
+            return false;
+        }
+        theUserId.setPhone(newPhone);
+        userRepository.save(theUserId);
+        return true;
+    }
+
+    public boolean changeEmail(Long id, String newEmail) {
+        User theUserId = userRepository.getById(id);
+        List<String> allEmails = userRepository.getAllEmails();
+        if(allEmails.contains(newEmail)){
+            return false;
+        }
+        theUserId.setEmail(newEmail);
+        userRepository.save(theUserId);
+        return true;
+    }
 
 }

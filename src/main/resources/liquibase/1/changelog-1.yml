@@ -62,6 +62,9 @@ databaseChangeLog:
               - column:
                   name: balance
                   type: double
+              - column:
+                  name: initialBalance
+                  type: double
 
 
 
