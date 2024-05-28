@@ -26,7 +26,7 @@ public class User {
     private String email;
     private String phone;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "bank_account_id")
     private BankAccount bankAccountId;
 

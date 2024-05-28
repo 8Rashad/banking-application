@@ -1,4 +1,4 @@
-databaseChangeLog:
+ databaseChangeLog:
   - changeSet:
       id: Create users and bank_account tables
       author: Rashad Suleymanov

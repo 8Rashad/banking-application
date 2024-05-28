@@ -18,7 +18,6 @@ public class UserManagementApi {
     private final UserRepository userRepository;
     private final BankAccountRepository bankAccountRepository;
     private static Map<String, User> users = new HashMap<>();
-    private static List<User> allUsers = new ArrayList<>();
 
     public boolean saveUser(UserRequest userRequest) {
         if (isUsernameTaken(userRequest.getUsername()) || isPhoneTaken(userRequest.getPhone()) || isEmailTaken(userRequest.getEmail())) {
@@ -29,7 +28,10 @@ public class UserManagementApi {
         BankAccount initialBalance = userRequest.getInitialBalance();
         bankAccountRepository.save(initialBalance);
 
+
         userRepository.save(newUser);
+
+        userRepository.flush();
 
         users.put(newUser.getUsername(), newUser);
 
@@ -37,7 +39,7 @@ public class UserManagementApi {
     }
 
     public List<User> findAll(){
-        return allUsers;
+        return userRepository.findAll();
     }
 
 

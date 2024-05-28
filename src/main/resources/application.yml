@@ -17,5 +17,9 @@ spring:
   security:
     user:
       name: username
-      password: scarypassword
+      password: password
+
+
+
+
 

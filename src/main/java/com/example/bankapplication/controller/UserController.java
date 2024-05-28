@@ -24,7 +24,6 @@ public class UserController {
 
     @GetMapping
     public List<User> retrieveAllUsers() {
-
         return userManagementApi.findAll();
     }
 
